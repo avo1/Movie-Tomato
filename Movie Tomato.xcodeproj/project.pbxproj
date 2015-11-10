@@ -9,16 +9,17 @@
 /* Begin PBXBuildFile section */
 		1670BBCD22A7EE4A836878D8 /* Pods_Movie_Tomato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */; };
 		185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185823E31BF2099A00FF9062 /* DetailViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186424141BF25E7300BF1F79 /* MovieCell.swift */; settings = {ASSET_TAGS = (); }; };
 		18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */; };
 		18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */; };
 		18AA0AD21BF0CC94005D1C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD01BF0CC94005D1C98 /* Main.storyboard */; };
 		18AA0AD41BF0CC94005D1C98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */; };
 		18AA0AD71BF0CC94005D1C98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD51BF0CC94005D1C98 /* LaunchScreen.storyboard */; };
-		18AA0AE11BF0D294005D1C98 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0AE01BF0D294005D1C98 /* MovieCell.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		185823E31BF2099A00FF9062 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		186424141BF25E7300BF1F79 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Tomato.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
@@ -26,7 +27,6 @@
 		18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18AA0AD61BF0CC94005D1C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18AA0AD81BF0CC94005D1C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		18AA0AE01BF0D294005D1C98 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieCell.swift; path = ../MovieCell.swift; sourceTree = "<group>"; };
 		C28FFEE53F7460416CCD8D2F /* Pods-Movie Tomato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Tomato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato.debug.xcconfig"; sourceTree = "<group>"; };
 		C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_Tomato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC0A4A1685A248DEA3D9486C /* Pods-Movie Tomato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Tomato.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato.release.xcconfig"; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		18AA0ACB1BF0CC94005D1C98 /* Movie Tomato */ = {
 			isa = PBXGroup;
 			children = (
-				18AA0AE01BF0D294005D1C98 /* MovieCell.swift */,
+				186424141BF25E7300BF1F79 /* MovieCell.swift */,
 				18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */,
 				18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */,
 				18AA0AD01BF0CC94005D1C98 /* Main.storyboard */,
@@ -218,8 +218,8 @@
 			files = (
 				18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */,
 				18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */,
+				186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */,
 				185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */,
-				18AA0AE11BF0D294005D1C98 /* MovieCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
