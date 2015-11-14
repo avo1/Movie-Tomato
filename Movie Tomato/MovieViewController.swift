@@ -11,6 +11,8 @@ import AFNetworking
 
 class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
   
+  
+  
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var tabbarController: UITabBar!
   @IBOutlet weak var noNetworkLabel: UILabel!
@@ -34,14 +36,17 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     //    let attributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     //    let attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributes)
     //    refreshControl.attributedTitle = attributedTitle
+    
     refreshControl.tintColor = UIColor.whiteColor()
     refreshControl.addTarget(self, action: Selector("fetchMovies"), forControlEvents: UIControlEvents.ValueChanged)
     tableView.addSubview(refreshControl)
+    tableView.contentInset = UIEdgeInsetsZero
     
     noNetworkLabel.alpha = 0
     noNetworkLabel.frame.origin.y = 40
+    
     tabbarController.selectedItem = tabbarController.items![0]
-    tabbarController.tintColor = UIColor.blackColor()
+    tabbarController.tintColor = UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)
     jsonURL = movieDataURL
     
     CozyLoadingActivity.show("Loading...", disableUI: true)
@@ -62,13 +67,12 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
           self.noNetworkLabel.alpha = 1
           self.noNetworkLabel.frame.origin.y = 65
           
-          //      // Move down the tableView
-          //      var frame = self.tableView.frame
-          //      frame.origin.y = 90
-          //      self.tableView.frame = frame
+          // Move down the tableView
+          self.tableView.frame.origin.y = 90
           }, completion: nil)
         
-        // Hide the hud
+        // Stop refreshing, hide the hud
+        self.refreshControl.endRefreshing()
         CozyLoadingActivity.hide(success: true, animated: false)
         return
       }
@@ -76,6 +80,7 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
       // Normal position
       self.noNetworkLabel.alpha = 0
       self.noNetworkLabel.frame.origin.y = 40
+      self.tableView.frame.origin.y = 65
       
       let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
       self.movies = json["movies"] as! [NSDictionary]
