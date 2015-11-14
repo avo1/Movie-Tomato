@@ -13,16 +13,20 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var tabbarController: UITabBar!
+  @IBOutlet weak var noNetworkLabel: UILabel!
   
   var movies = [NSDictionary] ()
   var refreshControl = UIRefreshControl()
   
   let movieDataURL = "https://coderschool-movies.herokuapp.com/movies?api_key=xja087zcvxljadsflh214"
   let dvdDataURL = "https://coderschool-movies.herokuapp.com/dvds?api_key=xja087zcvxljadsflh214"
+  var jsonURL: String!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
+    //hasConnectivity()
+    
     self.tableView.dataSource = self
     self.tableView.delegate = self
     self.tabbarController.delegate = self
@@ -34,28 +38,48 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     refreshControl.addTarget(self, action: Selector("fetchMovies"), forControlEvents: UIControlEvents.ValueChanged)
     tableView.addSubview(refreshControl)
     
+    noNetworkLabel.alpha = 0
+    noNetworkLabel.frame.origin.y = 40
+    tabbarController.selectedItem = tabbarController.items![0]
+    tabbarController.tintColor = UIColor.blackColor()
+    jsonURL = movieDataURL
+    
     CozyLoadingActivity.show("Loading...", disableUI: true)
     fetchMovies()
   }
   
   func fetchMovies() {
-    //        movies = [
-    //            ["title": "007", "synopsis": "great movie"]
-    //        ]
     
-    let url = NSURL(string: dvdDataURL)
+    let url = NSURL(string: jsonURL)
     //let request = NSURLRequest(URL: url!)
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
       
       guard error == nil else {
         print("error in fetchMovie")
+        // Show a network error indicator here
+        UIView.animateWithDuration(1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+          self.noNetworkLabel.alpha = 1
+          self.noNetworkLabel.frame.origin.y = 65
+          
+          //      // Move down the tableView
+          //      var frame = self.tableView.frame
+          //      frame.origin.y = 90
+          //      self.tableView.frame = frame
+          }, completion: nil)
+        
+        // Hide the hud
+        CozyLoadingActivity.hide(success: true, animated: false)
         return
       }
       
+      // Normal position
+      self.noNetworkLabel.alpha = 0
+      self.noNetworkLabel.frame.origin.y = 40
+      
       let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
       self.movies = json["movies"] as! [NSDictionary]
-      print("json", self.movies)
+      //print("json", self.movies)
       
       dispatch_async(dispatch_get_main_queue(), { () -> Void in
         self.tableView.reloadData()
@@ -138,8 +162,34 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
   
   func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
     // Switch view
-    
+    var newURL: String!
+    if tabbarController.selectedItem == tabbarController.items![0] {
+      newURL = movieDataURL
+    } else {
+      newURL = dvdDataURL
+    }
+    // Don't reload if user taps on the current tabBarItem again
+    if newURL != jsonURL {
+      jsonURL = newURL
+      CozyLoadingActivity.show("Loading...", disableUI: true)
+      fetchMovies()
+    }
   }
+  
+  // Check network status using Reachability, no need in this assignment
+  //  func hasConnectivity() -> Bool {
+  //    let reachability: Reachability
+  //    do {
+  //      reachability = try Reachability.reachabilityForInternetConnection()
+  //      let networkStatus: Int = reachability.currentReachabilityStatus.hashValue
+  //      print(networkStatus)
+  //      return networkStatus != 0
+  //    } catch {
+  //      print("Unable to create Reachability")
+  //      return false
+  //    }
+  //  }
+  
 }
 
 

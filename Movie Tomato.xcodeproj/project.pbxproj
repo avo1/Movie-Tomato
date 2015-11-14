@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1670BBCD22A7EE4A836878D8 /* Pods_Movie_Tomato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */; };
+		181566B51BF4B0DA0057969C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181566B41BF4B0DA0057969C /* Reachability.swift */; };
 		185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */; };
 		185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185823E31BF2099A00FF9062 /* DetailViewController.swift */; };
 		186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186424141BF25E7300BF1F79 /* MovieCell.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181566B41BF4B0DA0057969C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CozyLoadingActivity.swift; sourceTree = "<group>"; };
 		185823E31BF2099A00FF9062 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		186424141BF25E7300BF1F79 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 		18AA0ACB1BF0CC94005D1C98 /* Movie Tomato */ = {
 			isa = PBXGroup;
 			children = (
+				181566B41BF4B0DA0057969C /* Reachability.swift */,
 				186424141BF25E7300BF1F79 /* MovieCell.swift */,
 				18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */,
 				18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */,
@@ -221,6 +224,7 @@
 			files = (
 				185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */,
 				18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */,
+				181566B51BF4B0DA0057969C /* Reachability.swift in Sources */,
 				18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */,
 				186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */,
 				185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */,
@@ -339,6 +343,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.drm.Movie-Tomato";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -351,6 +356,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.drm.Movie-Tomato";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
