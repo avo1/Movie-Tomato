@@ -12,7 +12,7 @@ import AFNetworking
 let visiblePosition: CGFloat = 65.0
 let invisiblePosition: CGFloat = 34.0
 
-class MovieViewController: UIViewController, UITabBarDelegate, UISearchBarDelegate {
+class MovieViewController: UIViewController, UITabBarDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var tabbarController: UITabBar!
@@ -116,47 +116,6 @@ class MovieViewController: UIViewController, UITabBarDelegate, UISearchBarDelega
     }
   }
   
-  // MARK: Search Function
-  
-  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-    searchBar.enablesReturnKeyAutomatically = true
-    searchBar.showsCancelButton = true
-  }
-  
-  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-    searchBar.showsCancelButton = false
-  }
-  
-  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-    searchBar.text = ""
-    isSearching = false
-    self.tableView.reloadData()
-    searchBar.resignFirstResponder()
-  }
-  
-  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-    searchBar.resignFirstResponder()
-  }
-  
-  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-    if searchText.isEmpty {
-      // Load all
-      isSearching = false
-      self.tableView.reloadData()
-      return
-    }
-    
-    isSearching = true
-    foundMovies = movies.filter({ (movie) -> Bool in
-      let mv: NSDictionary = movie
-      let range = mv["title"]!.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-      return range.location != NSNotFound
-    })
-    
-    self.tableView.reloadData()
-  }
-  
-  
   // MARK: Network
   
   func showNoNetwork(yPosition: CGFloat) {
@@ -215,7 +174,7 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
         if Helper.hasConnectivity() {
           // Fade in image
           cell.posterView.alpha = 0.0
-          UIView.animateWithDuration(0.2, animations: {
+          UIView.animateWithDuration(0.3, animations: {
             cell.posterView.image = image
             cell.posterView.alpha = 1.0
             }, completion: nil)
@@ -253,6 +212,50 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
     let movie = isSearching ? foundMovies[indexPath.section] : movies[indexPath.section]
     
     performSegueWithIdentifier("detailSegue", sender: movie)
+  }
+  
+}
+
+// MARK: - Search Function
+
+extension MovieViewController: UISearchBarDelegate {
+  
+  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    searchBar.enablesReturnKeyAutomatically = true
+    searchBar.showsCancelButton = true
+  }
+  
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    searchBar.showsCancelButton = false
+  }
+  
+  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    searchBar.text = ""
+    isSearching = false
+    self.tableView.reloadData()
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.isEmpty {
+      // Load all
+      isSearching = false
+      self.tableView.reloadData()
+      return
+    }
+    
+    isSearching = true
+    foundMovies = movies.filter({ (movie) -> Bool in
+      let mv: NSDictionary = movie
+      let range = mv["title"]!.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+      return range.location != NSNotFound
+    })
+    
+    self.tableView.reloadData()
   }
   
 }

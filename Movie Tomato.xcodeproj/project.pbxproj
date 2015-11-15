@@ -71,19 +71,43 @@
 		18AA0ACB1BF0CC94005D1C98 /* Movie Tomato */ = {
 			isa = PBXGroup;
 			children = (
-				181566B41BF4B0DA0057969C /* Reachability.swift */,
-				186424141BF25E7300BF1F79 /* MovieCell.swift */,
+				18CC33031BF89848005F1688 /* Views */,
+				18CC33021BF8983E005F1688 /* Helper */,
+				18CC33011BF89806005F1688 /* View Controllers */,
 				18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */,
-				18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */,
 				18AA0AD01BF0CC94005D1C98 /* Main.storyboard */,
-				185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */,
-				185823E31BF2099A00FF9062 /* DetailViewController.swift */,
 				18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */,
 				18AA0AD51BF0CC94005D1C98 /* LaunchScreen.storyboard */,
 				18AA0AD81BF0CC94005D1C98 /* Info.plist */,
-				1861E6391BF83B9D004E64FC /* Helper.swift */,
 			);
 			path = "Movie Tomato";
+			sourceTree = "<group>";
+		};
+		18CC33011BF89806005F1688 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				185823E31BF2099A00FF9062 /* DetailViewController.swift */,
+				18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		18CC33021BF8983E005F1688 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				1861E6391BF83B9D004E64FC /* Helper.swift */,
+				185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */,
+				181566B41BF4B0DA0057969C /* Reachability.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		18CC33031BF89848005F1688 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				186424141BF25E7300BF1F79 /* MovieCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		31B49243A528D292E3FAD1BA /* Frameworks */ = {
