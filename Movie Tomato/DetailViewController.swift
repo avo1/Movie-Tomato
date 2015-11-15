@@ -18,7 +18,7 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet weak var networkView: UIView!
   @IBOutlet weak var hideNoNetworkButton: UIButton!
   
-  var movie: NSDictionary!
+  var movie: Moovee!
   var isReadingFullSynopsis: Bool!
   var tapGesture: UITapGestureRecognizer!
   
@@ -29,9 +29,9 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     
     
     // Create the content: title (year) + synopsis
-    var text = (movie["title"] as? String)! + " (" + String(movie["year"] as! Int) + ")\n\n"
+    var text = movie.titleWithYear()
     let titleLength = text.characters.count
-    text += (movie["synopsis"] as? String)!
+    text += movie.synopsis
     let textLength = text.characters.count
     
     let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text)
@@ -57,11 +57,8 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     self.view.addGestureRecognizer(tapGesture)
     
     // Load the thumbnail first for user to see while waiting for loading the full image
-    let thumbnailURLString = movie.valueForKeyPath("posters.thumbnail") as! String
-    posterImageView.setImageWithURL(NSURL(string: thumbnailURLString)!)
-    
-    let posterURLString = movie.valueForKeyPath("posters.detailed") as! String
-    posterImageView.setImageWithURL(NSURL(string: posterURLString)!)
+    posterImageView.setImageWithURL(NSURL(string: movie.thumbnailURLstring)!)
+    posterImageView.setImageWithURL(NSURL(string: movie.posterURLstring)!)
     
     // Indicate network status
     if Helper.hasConnectivity() {

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '224E8D884E39BED1C3EABDEB'
+               BlueprintIdentifier = 'C39FCA93ECE47A7B5C26B0AC'
                BlueprintName = 'Pods-Movie Tomato'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_Movie_Tomato.framework'>

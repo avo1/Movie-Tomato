@@ -8,6 +8,7 @@
 
 import UIKit
 import AFNetworking
+import SwiftyJSON
 
 let visiblePosition: CGFloat = 65.0
 let invisiblePosition: CGFloat = 34.0
@@ -21,8 +22,8 @@ class MovieViewController: UIViewController, UITabBarDelegate {
   @IBOutlet weak var hideNoNetworkButton: UIButton!
   @IBOutlet weak var searchBar: UISearchBar!
   
-  var movies = [NSDictionary] ()
-  var foundMovies = [NSDictionary] ()
+  var movies = [Moovee]()
+  var foundMovies = [Moovee] ()
   var isSearching: Bool = false
   var refreshControl = UIRefreshControl()
   
@@ -68,7 +69,7 @@ class MovieViewController: UIViewController, UITabBarDelegate {
     let url = NSURL(string: jsonURL)
     let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
     let session = NSURLSession.sharedSession()
-    let task = session.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+    let task = session.dataTaskWithRequest(request) { (dataFromNetwork: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
       
       guard error == nil else {
         print("error in fetchMovie")
@@ -78,8 +79,13 @@ class MovieViewController: UIViewController, UITabBarDelegate {
         return
       }
       
-      let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
-      self.movies = json["movies"] as! [NSDictionary]
+      //let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
+      //self.movies = json["movies"] as! [NSDictionary]
+      
+      let json = JSON(data: dataFromNetwork!)
+      if let listMovie = json["movies"].array {
+        self.movies = Moovee.moviesWithArray(listMovie)
+      }
       
       dispatch_async(dispatch_get_main_queue(), { () -> Void in
         self.tableView.reloadData()
@@ -95,7 +101,7 @@ class MovieViewController: UIViewController, UITabBarDelegate {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if (segue.identifier == "detailSegue") {
       let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
-      let data = sender as! NSDictionary
+      let data = sender as! Moovee
       detailVC.movie = data
     }
   }
@@ -145,27 +151,15 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
     cell.layer.borderWidth = 0.5
     cell.layer.borderColor = UIColor.grayColor().CGColor
     
-    cell.titleLabel?.text = movie["title"] as? String
-    cell.synopsisLabel?.text = movie["synopsis"] as? String
-    cell.yearLabel?.text = String(movie["year"] as! Int)
-    cell.mpaaRateLabel?.text = movie["mpaa_rating"] as? String
-    cell.lengthLabel?.text = String(movie["runtime"] as! Int) + "'"
-    cell.ratingLabel?.text = String(movie.valueForKeyPath("ratings.critics_score") as! Int) + "%"
+    cell.titleLabel?.text = movie.title
+    cell.synopsisLabel?.text = movie.synopsis
+    cell.yearLabel?.text = String(movie.year)
+    cell.mpaaRateLabel?.text = movie.mpaaRating
+    cell.lengthLabel?.text = movie.length
+    cell.ratingLabel?.text = movie.ratingPercentage
+    cell.ratingImage.image = UIImage(named: movie.ratingIconName)
     
-    if let rating = movie.valueForKeyPath("ratings.critics_rating") as? String {
-      switch rating {
-      case "Certified Fresh":
-        cell.ratingImage.image = UIImage(named: "cfresh")
-      case "Fresh":
-        cell.ratingImage.image = UIImage(named: "fresh")
-      case "Rotten":
-        cell.ratingImage.image = UIImage(named: "rotten")
-      default:
-        cell.ratingImage.image = UIImage(named: "fresh")
-      }
-    }
-    
-    let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)
+    let url = NSURL(string: movie.thumbnailURLstring)
     //cell.posterView?.setImageWithURL(url!)
     
     let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
@@ -182,7 +176,7 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
           // Load immediatelly
           cell.posterView.image = image
         }
-      }, failure: {(request:NSURLRequest,response:NSHTTPURLResponse?, error:NSError) -> Void in
+      }, failure: {(request: NSURLRequest,response: NSHTTPURLResponse?, error: NSError) -> Void in
         
     })
     
@@ -250,8 +244,8 @@ extension MovieViewController: UISearchBarDelegate {
     
     isSearching = true
     foundMovies = movies.filter({ (movie) -> Bool in
-      let mv: NSDictionary = movie
-      let range = mv["title"]!.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+      let mv: Moovee = movie
+      let range = NSString(string: mv.title).rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
       return range.location != NSNotFound
     })
     

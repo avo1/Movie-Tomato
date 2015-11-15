@@ -13,6 +13,7 @@
 		185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185823E31BF2099A00FF9062 /* DetailViewController.swift */; };
 		1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861E6391BF83B9D004E64FC /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
 		186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186424141BF25E7300BF1F79 /* MovieCell.swift */; };
+		189E7BC71BF89F5100541496 /* Moovee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E7BC61BF89F5100541496 /* Moovee.swift */; settings = {ASSET_TAGS = (); }; };
 		18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */; };
 		18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */; };
 		18AA0AD21BF0CC94005D1C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD01BF0CC94005D1C98 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 		185823E31BF2099A00FF9062 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		1861E6391BF83B9D004E64FC /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		186424141BF25E7300BF1F79 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		189E7BC61BF89F5100541496 /* Moovee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moovee.swift; sourceTree = "<group>"; };
 		18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Tomato.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
@@ -50,6 +52,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		189E7BC81BF89F5800541496 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				189E7BC61BF89F5100541496 /* Moovee.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		18AA0AC01BF0CC94005D1C98 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +81,7 @@
 		18AA0ACB1BF0CC94005D1C98 /* Movie Tomato */ = {
 			isa = PBXGroup;
 			children = (
+				189E7BC81BF89F5800541496 /* Models */,
 				18CC33031BF89848005F1688 /* Views */,
 				18CC33021BF8983E005F1688 /* Helper */,
 				18CC33011BF89806005F1688 /* View Controllers */,
@@ -250,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */,
+				189E7BC71BF89F5100541496 /* Moovee.swift in Sources */,
 				1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */,
 				18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */,
 				181566B51BF4B0DA0057969C /* Reachability.swift in Sources */,

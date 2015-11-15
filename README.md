@@ -32,3 +32,4 @@ Credits
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking)
 * [CozyLoading](https://github.com/goktugyil/CozyLoadingActivity)
 * [Reachability](https://github.com/ashleymills/Reachability.swift)
+* [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)

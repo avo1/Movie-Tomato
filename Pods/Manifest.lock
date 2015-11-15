@@ -20,11 +20,23 @@ PODS:
   - AFNetworking/UIKit (2.6.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
   - AFNetworking
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: 10f67900bdf2fb0faba3371249a6fefdcaa880c5
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0

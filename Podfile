@@ -5,5 +5,6 @@ use_frameworks!
 
 target 'Movie Tomato' do
   pod 'AFNetworking'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 
