@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().barTintColor = UIColor.blackColor()
     UINavigationBar.appearance().tintColor = UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)
     UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)]
+    UISearchBar.appearance().tintColor = UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)
+    // Cache
+    let URLCache = NSURLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 20 * 1024 * 1024, diskPath: nil)
+    NSURLCache.setSharedURLCache(URLCache)
+    
     return true
   }
   

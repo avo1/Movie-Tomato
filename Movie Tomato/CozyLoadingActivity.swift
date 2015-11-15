@@ -158,7 +158,7 @@ struct CozyLoadingActivity {
         if success! {
           animationDuration = 0 //0.5
         } else {
-          animationDuration = 1
+          animationDuration = 0
         }
       }
       

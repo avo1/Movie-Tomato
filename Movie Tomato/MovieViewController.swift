@@ -9,15 +9,21 @@
 import UIKit
 import AFNetworking
 
-class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
-  
-  
+let visiblePosition: CGFloat = 65.0
+let invisiblePosition: CGFloat = 34.0
+
+class MovieViewController: UIViewController, UITabBarDelegate, UISearchBarDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var tabbarController: UITabBar!
   @IBOutlet weak var noNetworkLabel: UILabel!
+  @IBOutlet weak var networkView: UIView!
+  @IBOutlet weak var hideNoNetworkButton: UIButton!
+  @IBOutlet weak var searchBar: UISearchBar!
   
   var movies = [NSDictionary] ()
+  var foundMovies = [NSDictionary] ()
+  var isSearching: Bool = false
   var refreshControl = UIRefreshControl()
   
   let movieDataURL = "https://coderschool-movies.herokuapp.com/movies?api_key=xja087zcvxljadsflh214"
@@ -27,23 +33,16 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
-    //hasConnectivity()
     
-    self.tableView.dataSource = self
-    self.tableView.delegate = self
-    self.tabbarController.delegate = self
-    
-    //    let attributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-    //    let attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: attributes)
-    //    refreshControl.attributedTitle = attributedTitle
+    tableView.dataSource = self
+    tableView.delegate = self
+    tabbarController.delegate = self
+    searchBar.delegate = self
+    networkView.frame.origin.y = invisiblePosition
     
     refreshControl.tintColor = UIColor.whiteColor()
     refreshControl.addTarget(self, action: Selector("fetchMovies"), forControlEvents: UIControlEvents.ValueChanged)
     tableView.addSubview(refreshControl)
-    tableView.contentInset = UIEdgeInsetsZero
-    
-    noNetworkLabel.alpha = 0
-    noNetworkLabel.frame.origin.y = 40
     
     tabbarController.selectedItem = tabbarController.items![0]
     tabbarController.tintColor = UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)
@@ -51,40 +50,36 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     CozyLoadingActivity.show("Loading...", disableUI: true)
     fetchMovies()
+    
   }
   
   func fetchMovies() {
+    // Cancel all search
+    searchBarCancelButtonClicked(searchBar)
+    
+    // This is for display purpose only, the request will use the cache
+    // No need to handle the noNetwork in the request
+    if Helper.hasConnectivity() {
+      showNoNetwork(invisiblePosition)
+    } else {
+      showNoNetwork(visiblePosition)
+    }
     
     let url = NSURL(string: jsonURL)
-    //let request = NSURLRequest(URL: url!)
+    let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
     let session = NSURLSession.sharedSession()
-    let task = session.dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+    let task = session.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
       
       guard error == nil else {
         print("error in fetchMovie")
-        // Show a network error indicator here
-        UIView.animateWithDuration(1, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
-          self.noNetworkLabel.alpha = 1
-          self.noNetworkLabel.frame.origin.y = 65
-          
-          // Move down the tableView
-          self.tableView.frame.origin.y = 90
-          }, completion: nil)
-        
         // Stop refreshing, hide the hud
         self.refreshControl.endRefreshing()
-        CozyLoadingActivity.hide(success: true, animated: false)
+        CozyLoadingActivity.hide(success: false, animated: false)
         return
       }
       
-      // Normal position
-      self.noNetworkLabel.alpha = 0
-      self.noNetworkLabel.frame.origin.y = 40
-      self.tableView.frame.origin.y = 65
-      
       let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
       self.movies = json["movies"] as! [NSDictionary]
-      //print("json", self.movies)
       
       dispatch_async(dispatch_get_main_queue(), { () -> Void in
         self.tableView.reloadData()
@@ -94,11 +89,95 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     task.resume()
+    
   }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if (segue.identifier == "detailSegue") {
+      let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
+      let data = sender as! NSDictionary
+      detailVC.movie = data
+    }
+  }
+  
+  func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+    // Switch view
+    var newURL: String!
+    if tabbarController.selectedItem == tabbarController.items![0] {
+      newURL = movieDataURL
+    } else {
+      newURL = dvdDataURL
+    }
+    // Don't reload if user taps on the current tabBarItem again
+    if newURL != jsonURL {
+      jsonURL = newURL
+      CozyLoadingActivity.show("Loading...", disableUI: true)
+      fetchMovies()
+    }
+  }
+  
+  // MARK: Search Function
+  
+  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    searchBar.enablesReturnKeyAutomatically = true
+    searchBar.showsCancelButton = true
+  }
+  
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    searchBar.showsCancelButton = false
+  }
+  
+  func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    searchBar.text = ""
+    isSearching = false
+    self.tableView.reloadData()
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
+  func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText.isEmpty {
+      // Load all
+      isSearching = false
+      self.tableView.reloadData()
+      return
+    }
+    
+    isSearching = true
+    foundMovies = movies.filter({ (movie) -> Bool in
+      let mv: NSDictionary = movie
+      let range = mv["title"]!.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+      return range.location != NSNotFound
+    })
+    
+    self.tableView.reloadData()
+  }
+  
+  
+  // MARK: Network
+  
+  func showNoNetwork(yPosition: CGFloat) {
+    UIView.animateWithDuration(0.5, animations: {
+      self.networkView.frame.origin.y = yPosition
+    })
+  }
+  
+  @IBAction func hideNetworkMessage(sender: AnyObject) {
+    showNoNetwork(invisiblePosition)
+  }
+  
+}
+
+// MARK: - TableView
+
+extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     // Use indexPath.section instead of .row because each section contains 1 row only
-    let movie = movies[indexPath.section]
+    let movie = isSearching ? foundMovies[indexPath.section] : movies[indexPath.section]
     let cell = tableView.dequeueReusableCellWithIdentifier("movieCell") as! MovieCell
     
     // Make the round corner
@@ -126,14 +205,33 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.ratingImage.image = UIImage(named: "fresh")
       }
     }
-    //cell.posterView?.contentMode = .ScaleAspectFit
-    cell.posterView?.setImageWithURL(NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!)
+    
+    let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)
+    //cell.posterView?.setImageWithURL(url!)
+    
+    let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 5)
+    cell.posterView?.setImageWithURLRequest(request, placeholderImage: nil,
+      success: {(request: NSURLRequest, response: NSHTTPURLResponse?, image: UIImage) -> Void in
+        if Helper.hasConnectivity() {
+          // Fade in image
+          cell.posterView.alpha = 0.0
+          UIView.animateWithDuration(0.2, animations: {
+            cell.posterView.image = image
+            cell.posterView.alpha = 1.0
+            }, completion: nil)
+        } else {
+          // Load immediatelly
+          cell.posterView.image = image
+        }
+      }, failure: {(request:NSURLRequest,response:NSHTTPURLResponse?, error:NSError) -> Void in
+        
+    })
     
     return cell
   }
   
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return movies.count
+    return isSearching ? foundMovies.count : movies.count
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,52 +248,11 @@ class MovieViewController: UIViewController, UITableViewDelegate, UITableViewDat
     return footerView
   }
   
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if (segue.identifier == "detailSegue") {
-      let detailVC: DetailViewController = segue.destinationViewController as! DetailViewController
-      let data = sender as! NSDictionary
-      detailVC.movie = data
-    }
-  }
-  
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     // Perform segue
-    let movie = movies[indexPath.section]
+    let movie = isSearching ? foundMovies[indexPath.section] : movies[indexPath.section]
     
     performSegueWithIdentifier("detailSegue", sender: movie)
   }
   
-  func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
-    // Switch view
-    var newURL: String!
-    if tabbarController.selectedItem == tabbarController.items![0] {
-      newURL = movieDataURL
-    } else {
-      newURL = dvdDataURL
-    }
-    // Don't reload if user taps on the current tabBarItem again
-    if newURL != jsonURL {
-      jsonURL = newURL
-      CozyLoadingActivity.show("Loading...", disableUI: true)
-      fetchMovies()
-    }
-  }
-  
-  // Check network status using Reachability, no need in this assignment
-  //  func hasConnectivity() -> Bool {
-  //    let reachability: Reachability
-  //    do {
-  //      reachability = try Reachability.reachabilityForInternetConnection()
-  //      let networkStatus: Int = reachability.currentReachabilityStatus.hashValue
-  //      print(networkStatus)
-  //      return networkStatus != 0
-  //    } catch {
-  //      print("Unable to create Reachability")
-  //      return false
-  //    }
-  //  }
-  
 }
-
-
-

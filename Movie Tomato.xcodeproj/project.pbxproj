@@ -11,6 +11,7 @@
 		181566B51BF4B0DA0057969C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181566B41BF4B0DA0057969C /* Reachability.swift */; };
 		185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */; };
 		185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185823E31BF2099A00FF9062 /* DetailViewController.swift */; };
+		1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861E6391BF83B9D004E64FC /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
 		186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186424141BF25E7300BF1F79 /* MovieCell.swift */; };
 		18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */; };
 		18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */; };
@@ -23,6 +24,7 @@
 		181566B41BF4B0DA0057969C /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CozyLoadingActivity.swift; sourceTree = "<group>"; };
 		185823E31BF2099A00FF9062 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		1861E6391BF83B9D004E64FC /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		186424141BF25E7300BF1F79 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Tomato.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */,
 				18AA0AD51BF0CC94005D1C98 /* LaunchScreen.storyboard */,
 				18AA0AD81BF0CC94005D1C98 /* Info.plist */,
+				1861E6391BF83B9D004E64FC /* Helper.swift */,
 			);
 			path = "Movie Tomato";
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */,
+				1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */,
 				18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */,
 				181566B51BF4B0DA0057969C /* Reachability.swift in Sources */,
 				18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */,

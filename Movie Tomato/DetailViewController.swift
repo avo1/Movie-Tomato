@@ -15,6 +15,8 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
   @IBOutlet weak var posterImageView: UIImageView!
   @IBOutlet weak var synopsisText: UITextView!
   @IBOutlet weak var dimmingView: UIView!
+  @IBOutlet weak var networkView: UIView!
+  @IBOutlet weak var hideNoNetworkButton: UIButton!
   
   var movie: NSDictionary!
   var isReadingFullSynopsis: Bool!
@@ -35,7 +37,7 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     let attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text)
     
     // Make bold title, regular synopsis, all white
-    attributedText.addAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(17)], range: NSRange(location: 0, length: titleLength))
+    attributedText.addAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(17)], range: NSRange(location: 0, length: titleLength - 2))
     attributedText.addAttributes([NSFontAttributeName: UIFont.systemFontOfSize(15)], range: NSRange(location: titleLength, length: textLength - titleLength))
     attributedText.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor() , range: NSRange(location: 0, length: textLength))
     
@@ -44,7 +46,7 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     synopsisText.selectable = false
     
     // Create the "padding" for the text
-    synopsisText.textContainerInset = UIEdgeInsetsMake(5, 10, 10, 10)
+    synopsisText.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 10)
     isReadingFullSynopsis = false
     showSynopsis(UIScreen.mainScreen().bounds.height - 100, bgAlpha: 0.1)
     
@@ -61,6 +63,12 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
     let posterURLString = movie.valueForKeyPath("posters.detailed") as! String
     posterImageView.setImageWithURL(NSURL(string: posterURLString)!)
     
+    // Indicate network status
+    if Helper.hasConnectivity() {
+      showNoNetwork(invisiblePosition)
+    } else {
+      showNoNetwork(visiblePosition)
+    }
   }
   
   func showMore(gesture: UITapGestureRecognizer) {
@@ -94,22 +102,6 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
   //  }
   
   
-  func calcTextHeightToFitContent(label:UILabel) -> Int {
-    if let text = label.text {
-      let myText = text as NSString
-      let attributes = [NSFontAttributeName: UIFont.systemFontOfSize(UIFont.systemFontSize())]
-      
-      // Calculate actual size of UILabel before truncating
-      let labelSize = myText.boundingRectWithSize(CGSizeMake(label.bounds.width, CGFloat.max), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: attributes, context: nil)
-      
-      let lines = ceil(CGFloat(labelSize.height) / label.font.lineHeight)
-      return Int(lines)
-      
-    }
-    
-    return 0
-  }
-  
   func showSynopsis(y: CGFloat, bgAlpha: CGFloat) {
     UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: {
       self.dimmingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: bgAlpha)
@@ -125,5 +117,16 @@ class DetailViewController: UIViewController, UIGestureRecognizerDelegate {
       self.synopsisText.frame.size.height = textHeight
       self.synopsisText.frame.origin.y = frame.height - (textHeight + 10)
       }, completion: nil)
+  }
+  
+  // MARK: Network
+  func showNoNetwork(yPosition: CGFloat) {
+    UIView.animateWithDuration(0.5, animations: {
+      self.networkView.frame.origin.y = yPosition
+    })
+  }
+  
+  @IBAction func hideNetworkMessage(sender: AnyObject) {
+    showNoNetwork(invisiblePosition)
   }
 }
