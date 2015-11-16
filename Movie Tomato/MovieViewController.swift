@@ -13,7 +13,7 @@ import SwiftyJSON
 let visiblePosition: CGFloat = 65.0
 let invisiblePosition: CGFloat = 34.0
 
-class MovieViewController: UIViewController, UITabBarDelegate {
+class MovieViewController: UIViewController, UITabBarDelegate, UIGestureRecognizerDelegate {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var tabbarController: UITabBar!
@@ -21,11 +21,14 @@ class MovieViewController: UIViewController, UITabBarDelegate {
   @IBOutlet weak var networkView: UIView!
   @IBOutlet weak var hideNoNetworkButton: UIButton!
   @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var dimmingView: UIView!
   
   var movies = [Moovee]()
   var foundMovies = [Moovee] ()
   var isSearching: Bool = false
   var refreshControl = UIRefreshControl()
+  var tapGestureOnDimming: UITapGestureRecognizer!
+  var tapGestureOnTable: UITapGestureRecognizer!
   
   let movieDataURL = "https://coderschool-movies.herokuapp.com/movies?api_key=xja087zcvxljadsflh214"
   let dvdDataURL = "https://coderschool-movies.herokuapp.com/dvds?api_key=xja087zcvxljadsflh214"
@@ -40,6 +43,9 @@ class MovieViewController: UIViewController, UITabBarDelegate {
     tabbarController.delegate = self
     searchBar.delegate = self
     networkView.frame.origin.y = invisiblePosition
+    dimmingView.frame.origin.y = tableView.frame.origin.y
+    dimmingView.frame.size.height = tableView.frame.size.height
+    dimmingView.hidden = true
     
     refreshControl.tintColor = UIColor.whiteColor()
     refreshControl.addTarget(self, action: Selector("fetchMovies"), forControlEvents: UIControlEvents.ValueChanged)
@@ -48,6 +54,13 @@ class MovieViewController: UIViewController, UITabBarDelegate {
     tabbarController.selectedItem = tabbarController.items![0]
     tabbarController.tintColor = UIColor(red: 1, green: 99/255, blue: 71/255, alpha: 1)
     jsonURL = movieDataURL
+    
+    // When user seaching and tap on the dimmingView then cancel the search
+    // This behavior is exactly the same with seach in Setting on iOS
+    tapGestureOnDimming = UITapGestureRecognizer(target: self, action: "cancelSearch:")
+    dimmingView.addGestureRecognizer(tapGestureOnDimming)
+    //    tapGestureOnTable = UITapGestureRecognizer(target: self, action: "hideKeyboard:")
+    //    tableView.addGestureRecognizer(tapGestureOnTable)
     
     CozyLoadingActivity.show("Loading...", disableUI: true)
     fetchMovies()
@@ -145,7 +158,7 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
     let movie = isSearching ? foundMovies[indexPath.section] : movies[indexPath.section]
     let cell = tableView.dequeueReusableCellWithIdentifier("movieCell") as! MovieCell
     
-    // Make the round corner
+    // Make the round corners
     cell.layer.cornerRadius = 5
     cell.layer.masksToBounds = true
     cell.layer.borderWidth = 0.5
@@ -191,11 +204,11 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
     return 1
   }
   
-  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+  func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 10.0
   }
   
-  func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+  func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     let footerView = UIView(frame: CGRectMake(0, 0, tableView.frame.size.width, 10))
     footerView.backgroundColor = UIColor.clearColor()
     return footerView
@@ -214,18 +227,28 @@ extension MovieViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension MovieViewController: UISearchBarDelegate {
   
-  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-    searchBar.enablesReturnKeyAutomatically = true
-    searchBar.showsCancelButton = true
+  func cancelSearch(gesture: UITapGestureRecognizer) {
+    if gesture.state == UIGestureRecognizerState.Ended {
+      searchBarCancelButtonClicked(searchBar)
+    }
   }
   
-  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-    searchBar.showsCancelButton = false
+  //  func hideKeyboard(gesture: UITapGestureRecognizer) {
+  //    searchBar.resignFirstResponder()
+  //  }
+  
+  func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    if let st = searchBar.text {
+      dimmingView.hidden = !st.isEmpty
+    }
+    searchBar.enablesReturnKeyAutomatically = true
+    searchBar.showsCancelButton = true
   }
   
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
     searchBar.text = ""
     isSearching = false
+    dimmingView.hidden = true
     self.tableView.reloadData()
     searchBar.resignFirstResponder()
   }
@@ -239,10 +262,12 @@ extension MovieViewController: UISearchBarDelegate {
       // Load all
       isSearching = false
       self.tableView.reloadData()
+      dimmingView.hidden = false
       return
     }
     
     isSearching = true
+    dimmingView.hidden = true
     foundMovies = movies.filter({ (movie) -> Bool in
       let mv: Moovee = movie
       let range = NSString(string: mv.title).rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)

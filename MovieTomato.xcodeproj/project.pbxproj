@@ -28,7 +28,7 @@
 		1861E6391BF83B9D004E64FC /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		186424141BF25E7300BF1F79 /* MovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		189E7BC61BF89F5100541496 /* Moovee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Moovee.swift; sourceTree = "<group>"; };
-		18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Tomato.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		18AA0AC91BF0CC94005D1C98 /* MovieTomato.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieTomato.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		18AA0AD11BF0CC94005D1C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		18AA0ACA1BF0CC94005D1C98 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */,
+				18AA0AC91BF0CC94005D1C98 /* MovieTomato.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +141,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18AA0AC81BF0CC94005D1C98 /* Movie Tomato */ = {
+		18AA0AC81BF0CC94005D1C98 /* MovieTomato */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18AA0ADB1BF0CC94005D1C98 /* Build configuration list for PBXNativeTarget "Movie Tomato" */;
+			buildConfigurationList = 18AA0ADB1BF0CC94005D1C98 /* Build configuration list for PBXNativeTarget "MovieTomato" */;
 			buildPhases = (
 				6BE4D708E3C31C0D5B80D54C /* Check Pods Manifest.lock */,
 				18AA0AC51BF0CC94005D1C98 /* Sources */,
@@ -156,9 +156,9 @@
 			);
 			dependencies = (
 			);
-			name = "Movie Tomato";
+			name = MovieTomato;
 			productName = "Movie Tomato";
-			productReference = 18AA0AC91BF0CC94005D1C98 /* Movie Tomato.app */;
+			productReference = 18AA0AC91BF0CC94005D1C98 /* MovieTomato.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -176,7 +176,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18AA0AC41BF0CC94005D1C98 /* Build configuration list for PBXProject "Movie Tomato" */;
+			buildConfigurationList = 18AA0AC41BF0CC94005D1C98 /* Build configuration list for PBXProject "MovieTomato" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -189,7 +189,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18AA0AC81BF0CC94005D1C98 /* Movie Tomato */,
+				18AA0AC81BF0CC94005D1C98 /* MovieTomato */,
 			);
 		};
 /* End PBXProject section */
@@ -379,10 +379,11 @@
 			baseConfigurationReference = C28FFEE53F7460416CCD8D2F /* Pods-Movie Tomato.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Movie Tomato/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.drm.Movie-Tomato";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.drm.MovieTomato;
+				PRODUCT_NAME = MovieTomato;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
@@ -392,10 +393,11 @@
 			baseConfigurationReference = CC0A4A1685A248DEA3D9486C /* Pods-Movie Tomato.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Movie Tomato/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.drm.Movie-Tomato";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.drm.MovieTomato;
+				PRODUCT_NAME = MovieTomato;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
@@ -403,7 +405,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18AA0AC41BF0CC94005D1C98 /* Build configuration list for PBXProject "Movie Tomato" */ = {
+		18AA0AC41BF0CC94005D1C98 /* Build configuration list for PBXProject "MovieTomato" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18AA0AD91BF0CC94005D1C98 /* Debug */,
@@ -412,7 +414,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18AA0ADB1BF0CC94005D1C98 /* Build configuration list for PBXNativeTarget "Movie Tomato" */ = {
+		18AA0ADB1BF0CC94005D1C98 /* Build configuration list for PBXNativeTarget "MovieTomato" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18AA0ADC1BF0CC94005D1C98 /* Debug */,

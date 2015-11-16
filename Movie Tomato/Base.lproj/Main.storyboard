@@ -7,7 +7,7 @@
         <!--Rotten 🍅-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MovieViewController" customModule="Movie_Tomato" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="MovieViewController" customModule="MovieTomato" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCell" rowHeight="92" id="Jfq-Qk-s9c" customClass="MovieCell" customModule="Movie_Tomato" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCell" rowHeight="92" id="Jfq-Qk-s9c" customClass="MovieCell" customModule="MovieTomato" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="365" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jfq-Qk-s9c" id="dUq-wB-j7l">
@@ -157,6 +157,12 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view alpha="0.29999999999999999" contentMode="scaleToFill" id="3mJ-U5-nEQ" userLabel="dimmingView">
+                                <rect key="frame" x="0.0" y="312" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -165,6 +171,7 @@
                     <navigationItem key="navigationItem" title="Rotten 🍅" id="MWJ-Fs-xy9"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="dimmingView" destination="3mJ-U5-nEQ" id="JtU-6V-4GT"/>
                         <outlet property="hideNoNetworkButton" destination="nC6-iF-Mj6" id="gtm-Ir-g74"/>
                         <outlet property="networkView" destination="BMH-5Q-crV" id="ZW7-cm-Tqw"/>
                         <outlet property="noNetworkLabel" destination="YGn-K5-fTe" id="D1D-05-8ff"/>
@@ -181,7 +188,7 @@
         <!--Detail View Controller-->
         <scene sceneID="hTH-b9-LUe">
             <objects>
-                <viewController storyboardIdentifier="detailVC" id="6td-GE-t5N" customClass="DetailViewController" customModule="Movie_Tomato" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailVC" id="6td-GE-t5N" customClass="DetailViewController" customModule="MovieTomato" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R1F-m4-eE7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

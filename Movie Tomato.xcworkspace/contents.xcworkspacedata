@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Movie Tomato.xcodeproj">
+      location = "group:/Users/davevo/Documents/Developer/Xcode/adCoderSchool/Movie-Tomato/MovieTomato.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
