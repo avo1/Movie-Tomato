@@ -7,18 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1670BBCD22A7EE4A836878D8 /* Pods_Movie_Tomato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */; };
 		181566B51BF4B0DA0057969C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181566B41BF4B0DA0057969C /* Reachability.swift */; };
 		185671C71BF3AC1C00992D71 /* CozyLoadingActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185671C61BF3AC1C00992D71 /* CozyLoadingActivity.swift */; };
 		185823E41BF2099B00FF9062 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185823E31BF2099A00FF9062 /* DetailViewController.swift */; };
-		1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861E6391BF83B9D004E64FC /* Helper.swift */; settings = {ASSET_TAGS = (); }; };
+		1861E63A1BF83B9D004E64FC /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1861E6391BF83B9D004E64FC /* Helper.swift */; };
 		186424151BF25E7300BF1F79 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186424141BF25E7300BF1F79 /* MovieCell.swift */; };
-		189E7BC71BF89F5100541496 /* Moovee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E7BC61BF89F5100541496 /* Moovee.swift */; settings = {ASSET_TAGS = (); }; };
+		189E7BC71BF89F5100541496 /* Moovee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E7BC61BF89F5100541496 /* Moovee.swift */; };
 		18AA0ACD1BF0CC94005D1C98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACC1BF0CC94005D1C98 /* AppDelegate.swift */; };
 		18AA0ACF1BF0CC94005D1C98 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AA0ACE1BF0CC94005D1C98 /* MovieViewController.swift */; };
 		18AA0AD21BF0CC94005D1C98 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD01BF0CC94005D1C98 /* Main.storyboard */; };
 		18AA0AD41BF0CC94005D1C98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */; };
 		18AA0AD71BF0CC94005D1C98 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA0AD51BF0CC94005D1C98 /* LaunchScreen.storyboard */; };
+		2F9AD16028EBD5BE84C5A974 /* Pods_MovieTomato.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53484CC73EDD89623337DC8B /* Pods_MovieTomato.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,9 +35,9 @@
 		18AA0AD31BF0CC94005D1C98 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18AA0AD61BF0CC94005D1C98 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18AA0AD81BF0CC94005D1C98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C28FFEE53F7460416CCD8D2F /* Pods-Movie Tomato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Tomato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato.debug.xcconfig"; sourceTree = "<group>"; };
-		C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movie_Tomato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CC0A4A1685A248DEA3D9486C /* Pods-Movie Tomato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movie Tomato.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato.release.xcconfig"; sourceTree = "<group>"; };
+		21A9FE38A01A7A5239CD0ADB /* Pods-MovieTomato.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieTomato.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieTomato/Pods-MovieTomato.release.xcconfig"; sourceTree = "<group>"; };
+		53484CC73EDD89623337DC8B /* Pods_MovieTomato.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieTomato.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFB97DF6E59C0CB04325BBA9 /* Pods-MovieTomato.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieTomato.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieTomato/Pods-MovieTomato.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1670BBCD22A7EE4A836878D8 /* Pods_Movie_Tomato.framework in Frameworks */,
+				2F9AD16028EBD5BE84C5A974 /* Pods_MovieTomato.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +124,7 @@
 		31B49243A528D292E3FAD1BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C5D40A30A9D456A2EF966CEE /* Pods_Movie_Tomato.framework */,
+				53484CC73EDD89623337DC8B /* Pods_MovieTomato.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,8 +132,8 @@
 		D4B68F01C14D80A67CB5BEEC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C28FFEE53F7460416CCD8D2F /* Pods-Movie Tomato.debug.xcconfig */,
-				CC0A4A1685A248DEA3D9486C /* Pods-Movie Tomato.release.xcconfig */,
+				AFB97DF6E59C0CB04325BBA9 /* Pods-MovieTomato.debug.xcconfig */,
+				21A9FE38A01A7A5239CD0ADB /* Pods-MovieTomato.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieTomato/Pods-MovieTomato-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1F178D3A4487F36DD211E1B /* Copy Pods Resources */ = {
@@ -250,7 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movie Tomato/Pods-Movie Tomato-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieTomato/Pods-MovieTomato-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -376,7 +376,7 @@
 		};
 		18AA0ADC1BF0CC94005D1C98 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C28FFEE53F7460416CCD8D2F /* Pods-Movie Tomato.debug.xcconfig */;
+			baseConfigurationReference = AFB97DF6E59C0CB04325BBA9 /* Pods-MovieTomato.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -390,7 +390,7 @@
 		};
 		18AA0ADD1BF0CC94005D1C98 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC0A4A1685A248DEA3D9486C /* Pods-Movie Tomato.release.xcconfig */;
+			baseConfigurationReference = 21A9FE38A01A7A5239CD0ADB /* Pods-MovieTomato.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

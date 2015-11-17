@@ -250,6 +250,10 @@ extension MovieViewController: UISearchBarDelegate {
     searchBar.showsCancelButton = true
   }
   
+  func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+  
   func searchBarCancelButtonClicked(searchBar: UISearchBar) {
     searchBar.text = ""
     isSearching = false
