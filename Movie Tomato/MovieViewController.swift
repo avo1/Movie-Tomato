@@ -233,6 +233,11 @@ extension MovieViewController: UISearchBarDelegate {
     }
   }
   
+  override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    self.view.superview?.superview?.endEditing(true)
+    searchBar.resignFirstResponder()
+  }
+  
   //  func hideKeyboard(gesture: UITapGestureRecognizer) {
   //    searchBar.resignFirstResponder()
   //  }
